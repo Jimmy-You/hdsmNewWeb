@@ -1,0 +1,16 @@
+{
+  "id": "1708622",
+  "name": "hdsm",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "hdsm",
+  "glyphs": [
+    {
+      "icon_id": "9385408",
+      "name": "返 回",
+      "font_class": "fanhui",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    }
+  ]
+}
