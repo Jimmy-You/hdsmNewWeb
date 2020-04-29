@@ -1,6 +1,6 @@
 <template>
 	<div class="catalogMenuList">
-		<van-grid :column-num="4" :border="false">
+		<van-grid :column-num="3" :border="false">
 			<van-grid-item
 				v-for="listItem in listData"
 				:key="listItem.id"

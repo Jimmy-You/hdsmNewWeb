@@ -8,13 +8,19 @@
         background="#ff6600"
         placeholder="搜索您想要的产品"
       />
-      <van-tabs type="card" class="m_top_menus" v-model="activeTab">
+      <!-- <van-tabs type="card" class="m_top_menus" v-model="activeTab">
         <van-tab v-for="item in menuList" :title="item.lableName" :name="item.id" :key="item.id">
         </van-tab>
-      </van-tabs>
-      <menuItemList
-        :menuId="activeTab"
-      />
+      </van-tabs> -->
+      <div :style="{display: 'flex'}">
+        <van-sidebar v-model="activeTab" @change="activeChange" >
+          <van-sidebar-item v-for="item in menuList" :title="item.lableName" :name="item.id" :key="item.id" />
+        </van-sidebar>
+        <menuItemList
+          style="flex:1;"
+          :menuId="getActive"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -28,8 +34,13 @@ export default {
   data() {
     return  {
       searchKey: '',
-      activeTab: '',
+      activeTab: 0,
       menuList: [],
+    }
+  },
+  computed: {
+    getActive() {
+      return this.menuList[this.activeTab] ? this.menuList[this.activeTab].id : ''
     }
   },
   methods: {
@@ -45,12 +56,14 @@ export default {
       this.$axios.get(this.$url.getList, { id: -1 }).then((res) => {
           if(res.data.code == 0 && Array.isArray(res.data.result) && res.data.result.length) {
               this.menuList = res.data.result
-              this.activeTabName = res.data.result[0].id
           } else {
             this.menuList = [];
           }
       }).catch((err) => {
       })
+    },
+    activeChange(index) {
+      this.activeTab = index
     }
   },
   mounted() {
